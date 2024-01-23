@@ -4,6 +4,8 @@ asking question
 
 For token
 
+For checking pull function
+
 TODO: Add more to the title of your project here
 
 # LearningR:
