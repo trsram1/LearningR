@@ -6,6 +6,10 @@ For token
 
 For checking pull function
 
+Random stuff at 9:08am 
+
+random2
+
 TODO: Add more to the title of your project here
 
 # LearningR:
