@@ -2,7 +2,29 @@
 title: "Reproducible document"
 author: "Sriram Rajendran"
 format: html
+
 ---
+
+1. Sriram Raj
+2. DTU Nanolab
+
+# Intro
+
+**I have no idea** 
+
+# Methods and Results
+
+*What the heck?*
+
+## Analysis
+
+# Discussion
+
+
+
+```{r}
+2+2
+```
 
 ```{r setup}
 #| message: false
