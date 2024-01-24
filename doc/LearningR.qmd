@@ -1,0 +1,31 @@
+---
+title: "Reproducible document"
+author: "Sriram Rajendran"
+format: html
+---
+
+```{r setup}
+#| message: false
+#| warning: false
+library(tidyverse)
+library(NHANES)
+nhanes_small <- read_csv(here::here("data/NHANES_small.csv"))
+```
+
+```{r}
+nhanes_small <- select(nhanes_small, age, sex, bmi, diabetes, phys_active, bp_sys, bp_dia, education)
+nhanes_small
+```
+
+# Table of results
+```{r}
+nhanes_small %>%
+  filter(!is.na(diabetes)) %>%
+  group_by(diabetes, education) %>%
+  summarise(
+    mean_age = mean(age, na.rm = TRUE),
+    mean_bmi = mean(bmi, na.rm = TRUE)
+  ) %>%
+  ungroup() %>%
+  knitr::kable(caption = "Mean values of Age and BMI for each education and diabetes status")
+```
