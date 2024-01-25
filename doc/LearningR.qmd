@@ -250,3 +250,50 @@ nhanes_small %>%
   geom_point(na.rm = TRUE) +
   scale_color_viridis_c(option = "inferno")
 ```
+
+
+##Themes 
+
+```{r}
+base_scatterplot <- nhanes_small %>%
+  filter(!is.na(diabetes), !is.na(education)) %>%
+  ggplot(aes(x = bmi, y = bp_sys, colour = age)) +
+  geom_point(na.rm = TRUE) +
+  facet_grid(
+    rows = vars(diabetes),
+    cols = vars(education)
+  ) +
+  scale_color_viridis_c()
+
+base_scatterplot
+```
+```{r}
+base_scatterplot + theme_bw()
+```
+```{r}
+base_scatterplot + theme_minimal()
+```
+
+```{r}
+base_scatterplot + theme_void()
+```
+
+```{r}
+base_scatterplot + theme_classic()
+```
+
+```{r}
+theme_set(theme_minimal())
+base_scatterplot
+```
+
+## Labeling the axes
+```{r}
+base_scatterplot + 
+    labs(
+        title = "BMI, Systolic blood pressure, age by diabetes and education",
+        y = "sytolic blood pressure",
+        x = "BMI (Kg/m2)",
+    )
+```
+
