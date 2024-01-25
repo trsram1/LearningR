@@ -2,15 +2,14 @@
 title: "Reproducible document"
 author: "Sriram Rajendran"
 format: html
-
 ---
 
-1. Sriram Raj
-2. DTU Nanolab
+1.  Sriram Raj
+2.  DTU Nanolab
 
 # Intro
 
-**I have no idea** 
+**I have no idea**
 
 # Methods and Results
 
@@ -20,10 +19,8 @@ format: html
 
 # Discussion
 
-
-
 ```{r}
-2+2
+2 + 2
 ```
 
 ```{r setup}
@@ -40,6 +37,7 @@ nhanes_small
 ```
 
 # Table of results
+
 ```{r}
 nhanes_small %>%
   filter(!is.na(diabetes)) %>%
@@ -53,6 +51,7 @@ nhanes_small %>%
 ```
 
 ## Prettier table
+
 ```{r}
 nhanes_small %>%
   filter(!is.na(diabetes), !is.na(education)) %>%
@@ -78,4 +77,71 @@ nhanes_small %>%
   ) %>%
   knitr::kable(caption = "Mean values of Age and BMI for each education and diabetes status.")
 #| echo: false
+```
+
+
+# Picture excercise
+
+Cute dog in @fig-dude
+r
+
+![Image by Random dude from internet.](images/puppy.png){#fig-dude width="50%" height="50%"}
+
+###One variable plot
+
+```{r}
+#| fig-cap: "Distribution of BMI"
+#| label: fig-bmi-histo
+
+
+nhanes_small %>%
+  filter(bmi <= 60) %>%
+  ggplot(aes(x = bmi)) +
+  geom_histogram(na.rm = TRUE)
+```
+
+
+```{r}
+#| label: fig-diabetes-education
+#| fig-cap: "Count of Diabetes and Education"
+#| fig-subcap:
+#|- "Number of those with different education"
+#|- "Number if those with or without diabetes"
+#| layout-ncol: 2
+
+
+nhanes_small %>%
+  filter(!is.na(education)) %>%
+  ggplot(aes(education)) +
+  geom_bar()
+
+nhanes_small %>%
+  filter(!is.na(diabetes)) %>%
+  ggplot(aes(diabetes)) +
+  geom_bar()
+```
+
+###plotting two variables
+
+```{r}
+nhanes_small %>%
+  ggplot(aes(x = bmi, y = bp_sys)) +
+  geom_hex(na.rm = TRUE) +
+  geom_smooth(na.rm = TRUE)
+```
+
+## plotting two discrete variables      
+```{r}
+nhanes_small %>%
+  filter(!is.na(education), !is.na(diabetes)) %>%
+  ggplot(aes(x = diabetes, fill = education)) +
+  geom_bar(position = position_dodge())
+```
+
+##Plotting discrete and continous variables
+```{r}
+nhanes_small %>%
+  filter(!is.na(diabetes), bmi <= 60) %>%
+  ggplot(aes(x = diabetes, y = bmi)) +
+  geom_violin(na.rm = TRUE)
 ```
